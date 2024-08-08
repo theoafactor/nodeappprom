@@ -1,0 +1,18 @@
+version: "3"
+services: 
+  prometheus:
+    image: "prom/prometheus"
+    container_name: prometheus
+    ports: 
+    - "9091:9090"
+    command: --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  nodeapp:
+    build: 
+      context: nodeapp/ 
+    image: "nodeapp:2"
+    container_name: nodeapp
+    ports: 
+    - "1234:1234"
